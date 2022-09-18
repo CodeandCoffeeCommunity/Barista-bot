@@ -10,11 +10,16 @@ class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.role_message_id = 1020414801542918264  # ID of the message that can be reacted to to add/remove a role.
+        self.role_message_id = (
+            0  # ID of the message that can be reacted to to add/remove a role.
+        )
         self.emoji_to_role = {
-            discord.PartialEmoji(name="🟡"): int(
-                1020906856136314901
-            ),  # ID of the role New York associated with unicode emoji '🟡'.
+            discord.PartialEmoji(
+                name="🔴"
+            ): 1020907447822581823,  # ID of the role Chicago associated with unicode emoji '🔴'.
+            discord.PartialEmoji(
+                name="🟡"
+            ): 1020906856136314901,  # ID of the role New York associated with unicode emoji '🟡'.
         }
 
     async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
