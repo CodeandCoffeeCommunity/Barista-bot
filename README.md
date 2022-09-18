@@ -58,7 +58,7 @@ You can deploy this project for free on [Railway.app](https://railway.app/)
 
 1. Create a new project and select `deploy from GitHub repo`
     give railway.app access to your newly created GitHub repo.
-2. Go to the variables tab and add the [above mentioned](#Usage) variable.
+2. Go to the variables tab and add the [above mentioned](#Installation) variable.
 3. Set the `start command` to be `python main.py`.
 
 Barista bot will now be running all the time.
