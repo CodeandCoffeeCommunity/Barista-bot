@@ -53,6 +53,7 @@ class MyClient(discord.Client):
         try:
             # Finally, add the role.
             await payload.member.add_roles(role)
+            print(f"{payload.member} joined {role}")
         except discord.HTTPException:
             # If we want to do something in case of errors we'd do it here.
             pass
@@ -89,6 +90,7 @@ class MyClient(discord.Client):
         try:
             # Finally, remove the role.
             await member.remove_roles(role)
+            print(f"{member} left {role}")
         except discord.HTTPException:
             # If we want to do something in case of errors we'd do it here.
             pass
