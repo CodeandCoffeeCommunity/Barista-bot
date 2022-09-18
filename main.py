@@ -9,7 +9,7 @@ class MyClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.role_message_id = 1020927209130700821  # ID of the message that can be reacted to to add/remove a role.
+        self.role_message_id = 960556131766398986  # ID of the message that can be reacted to to add/remove a role.
         self.emoji_to_role = {
             discord.PartialEmoji(
                 name="🔴"
