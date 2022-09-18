@@ -18,8 +18,11 @@ class MyClient(discord.Client):
                 name="🔴"
             ): 1020907447822581823,  # ID of the role Chicago associated with unicode emoji '🔴'.
             discord.PartialEmoji(
+                name="🟢"
+            ): 1020906856136314901,  # ID of the role New York associated with unicode emoji '🟢'.
+            discord.PartialEmoji(
                 name="🟡"
-            ): 1020906856136314901,  # ID of the role New York associated with unicode emoji '🟡'.
+            ): 1020907461412143135,  # ID of the role Austin associated with unicode emoji '🟡'.
         }
 
     async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
