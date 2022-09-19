@@ -29,6 +29,9 @@ class MyClient(discord.Client):
             discord.PartialEmoji(
                 name="✅"
             ): 960545821189894174,  # ID of the role Verified Member associated with unicode emoji '✅'.
+            discord.PartialEmoji(
+                name="⚫"
+            ): 1021495205641338950,  # ID of the role Virtual / Online associated with unicode emoji '⚫'.
         }
 
     async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
