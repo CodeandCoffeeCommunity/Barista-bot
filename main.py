@@ -27,6 +27,9 @@ class MyClient(discord.Client):
                 name="⚪"
             ): 1020908145712828518,  # ID of the role St. Louis associated with unicode emoji '⚪'.
             discord.PartialEmoji(
+                name="🏝"
+            ): 1021599522964639796,  # ID of the role Whidbey island associated with unicode emoji '🏝'.
+            discord.PartialEmoji(
                 name="✅"
             ): 960545821189894174,  # ID of the role Verified Member associated with unicode emoji '✅'.
             discord.PartialEmoji(
