@@ -37,7 +37,7 @@ pip install -r requirements.txt
 Create a bot on and copy the `DISCORD_TOKEN` and export it as a variable.
 If discord bots are new to you I recommend this [video](https://youtu.be/nW8c7vT6Hl4) to set it up. If you are familiar with discord bots or you own one you can skip this part.
 ```
-export BARISTA_TOKEN=<INSERT THE BOTS DISCORD TOKEN>
+export BARISTA_TOKEN='<INSERT-THE-DISCORD-TOKEN>'
 ```
 
 # Usage
