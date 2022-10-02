@@ -50,7 +50,7 @@ def fetch_meetup_events_detail(chapter):
             # "description": event["description"], # need to fix length issue
             "start_time": start_time,
             "end_time": end_time,
-            "location": get_address(event["group"]["lat"], event["group"]["lon"]),
+            "location": event["group"]["localized_location"],
             "description": event["link"],
         }
         scheduled_events[event["id"]] = scheduled_event

@@ -30,7 +30,7 @@ class Dropdown(discord.ui.Select):
         # The min and max values indicate we can only pick one of the three options
         # The options parameter defines the dropdown options. We defined this above
         super().__init__(
-            placeholder="Choose your event",
+            placeholder="Select events you wish to import",
             min_values=1,
             max_values=len(scheduled_events),
             options=options,
@@ -46,7 +46,9 @@ class Dropdown(discord.ui.Select):
             event = self.scheduled_events[event_id]
             await guild.create_scheduled_event(**event)
 
-        await interaction.response.send_message(f"{len(self.values)} event(s) created")
+        await interaction.response.send_message(
+            f'{len(self.values)} event{"s" if len(self.values) > 1 else ""} created'
+        )
 
 
 class DropdownView(discord.ui.View):
