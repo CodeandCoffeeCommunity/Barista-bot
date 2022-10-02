@@ -31,10 +31,10 @@ Number:
 This includes: -->
 Set up in Discord:
  - [ ] Chapter role
- - [ ] Chapter catagory 
- - [ ] General chapter channal accessible by the `@chapter` role
+ - [ ] Chapter category 
+ - [ ] General chapter channel accessible by the `@chapter` role
  - [ ] Private chapter channel accessible by the roles `@Volunteer` and `@Organizer`
- - [ ] add new chapter to to Welcome message
+ - [ ] Add new chapter to to Welcome message
 
 Bot configuration:
- - [ ] add chapter role and emoji to the bot source code
+ - [ ] Add chapter role and emoji to the bot source code
