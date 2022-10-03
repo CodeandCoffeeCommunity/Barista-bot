@@ -32,9 +32,7 @@ class Dropdown(discord.ui.Select):
         super().__init__(
             placeholder="Select events you wish to import",
             min_values=1,
-            max_values=25
-            if len(self.scheduled_events) > 25
-            else len(self.scheduled_events),
+            max_values=len(self.scheduled_events),
             options=options,
         )
 
