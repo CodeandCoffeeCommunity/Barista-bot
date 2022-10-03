@@ -8,7 +8,7 @@ from meetup_rest_api import fetch_meetup_events_detail
 
 DISCORD_TOKEN = os.getenv("BARISTA_TOKEN")
 
-# Defines a custom Select containing colour options
+# Defines a custom Select containing events from meetup.com
 # that the user can choose. The callback function
 # of this class is called when the user changes their choice
 class Dropdown(discord.ui.Select):
@@ -17,7 +17,7 @@ class Dropdown(discord.ui.Select):
         # Set the options that will be presented inside the dropdown
         self.scheduled_events = scheduled_events
         options = []
-        for event_id, event in scheduled_events.items():
+        for event_id, event in self.scheduled_events.items():
             options.append(
                 discord.SelectOption(
                     value=event_id,
@@ -32,7 +32,9 @@ class Dropdown(discord.ui.Select):
         super().__init__(
             placeholder="Select events you wish to import",
             min_values=1,
-            max_values=len(scheduled_events),
+            max_values=25
+            if len(self.scheduled_events) > 25
+            else len(self.scheduled_events),
             options=options,
         )
 

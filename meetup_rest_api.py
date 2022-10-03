@@ -40,9 +40,11 @@ def get_address(lat, lon):
 
 def fetch_meetup_events_detail(chapter):
     meetup_events = get_upcoming_meetup_events(chapter)
+    meetup_events.sort(key=lambda x: x["time"])
 
     scheduled_events = {}
-    for event in meetup_events:
+    for index, event in enumerate(meetup_events):
+        limit = 24  # Limit to 25 future events
         start_time = create_datetime_obj(event["time"], event["group"]["timezone"])
         end_time = start_time + timedelta(milliseconds=event["duration"])
         scheduled_event = {
@@ -54,5 +56,8 @@ def fetch_meetup_events_detail(chapter):
             "description": event["link"],
         }
         scheduled_events[event["id"]] = scheduled_event
+
+        if index == limit:
+            break
 
     return scheduled_events
