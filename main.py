@@ -177,12 +177,15 @@ async def event(ctx, chapter=None):
 
     if chapter is not None:
         scheduled_events = fetch_meetup_events_detail(chapter)
+        if scheduled_events:
 
-        # Create the view containing our dropdown
-        view = DropdownView(scheduled_events)
+            # Create the view containing our dropdown
+            view = DropdownView(scheduled_events)
 
-        # Sending a message containing our view
-        await ctx.send("Pick your event(s):", view=view)
+            # Sending a message containing our view
+            await ctx.send("Pick your event(s):", view=view)
+        else:
+            await ctx.send(f"No upcoming events for {chapter}")
     else:
         await ctx.send(
             "Pull meetup.com events over to discord\n\nUsage: !event <INSERT MEETUP.COM GROUP URL>"
