@@ -93,6 +93,9 @@ class Bot(commands.Bot):
             discord.PartialEmoji(
                 name="⚫"
             ): 1021495205641338950,  # ID of the role Virtual / Online associated with unicode emoji '⚫'.
+            discord.PartialEmoji(
+                name="🟣"
+            ): 1024892173310767186,  # ID of the role DC/MD/VA associated with unicode emoji '⚫'.
         }
 
     async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
