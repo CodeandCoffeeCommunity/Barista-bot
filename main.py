@@ -66,7 +66,9 @@ class Bot(commands.Bot):
         intents.members = True
 
         super().__init__(
-            command_prefix=commands.when_mentioned_or("!"), intents=intents
+            command_prefix=commands.when_mentioned_or("!"),
+            intents=intents,
+            activity=discord.Game(name="💻 & ☕"),
         )
         self.role_message_id = 960556131766398986  # ID of the message that can be reacted to to add/remove a role.
         self.emoji_to_role = {
