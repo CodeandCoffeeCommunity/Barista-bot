@@ -1,9 +1,9 @@
-# discord-bot
+# Barista :robot:
 
 <!-- Add banner here -->
 
 <!-- Describe your project in brief -->
-I'm Barista - a discord bot who assigns roles based on emoji reactions in discord.  
+I'm Barista :robot: - a discord bot who assigns roles based on emoji reactions in discord.  
   
   I am written in python using the [Discord.py](https://github.com/Rapptz/discord.py) framework.
 
