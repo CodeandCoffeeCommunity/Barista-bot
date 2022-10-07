@@ -26,7 +26,7 @@ Here is a sample TOC that is actually the TOC for this README. -->
 First clone the repo on your device using the command below:
 
 ```  
-git clone git@github.com:CodeandCoffeeCommunity/discord-bot.git
+git clone git@github.com:CodeandCoffeeCommunity/Barista-bot.git
 ```
 
 Before running the bot you will need to install all the requirements with this command:
