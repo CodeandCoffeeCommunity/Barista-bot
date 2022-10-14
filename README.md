@@ -1,11 +1,15 @@
-# Barista :robot:
+# Who Am I :robot:
 
 <!-- Add banner here -->
 
 <!-- Describe your project in brief -->
-I'm Barista :robot: - a discord bot who assigns roles based on emoji reactions in discord.  
-  
-  I am written in python using the [Discord.py](https://github.com/Rapptz/discord.py) framework.
+I'm Barista :robot: - a robotic discord volunteer at the [Code and Coffee Community](https://www.codeandcoffee.community/).  
+
+Thing I can Do:
+ - give new members access to the city channels their interested in; removing all those annoying irrelevant notifications
+ - bring in the meetup.com events into the discord server; making it easier for members to know when the next event is
+
+  I am written in :snake: python using the [Discord.py](https://github.com/Rapptz/discord.py) framework.
 
 # Table of contents
 
@@ -13,7 +17,7 @@ I'm Barista :robot: - a discord bot who assigns roles based on emoji reactions i
 
 Here is a sample TOC that is actually the TOC for this README. -->
 
-- [Project Title](#project-title)
+- [Who Am I :robot:](#who-am-i-robot)
 - [Table of contents](#table-of-contents)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -34,7 +38,7 @@ Before running the bot you will need to install all the requirements with this c
 ```
 pip install -r requirements.txt
 ```
-Create a bot on and copy the `DISCORD_TOKEN` and export it as a variable.
+Create a bot on [discord.com](https://discord.com/developers/applications) and copy the `DISCORD_TOKEN` and export it as a variable.
 If discord bots are new to you I recommend this [video](https://youtu.be/nW8c7vT6Hl4) to set it up. If you are familiar with discord bots or you own one you can skip this part.
 ```
 export BARISTA_TOKEN='<INSERT-THE-DISCORD-TOKEN>'
