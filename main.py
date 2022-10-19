@@ -204,21 +204,35 @@ async def event(ctx, chapter=None):
 @bot.command()
 @commands.has_any_role("Admin", "Organizer")
 async def new_chapter(ctx, chapter_name):
-    # organizer_role = await ctx.guild.get_role(899873033592913921)
-    # volunteer_role = await ctx.guild.get_role(993952153091702854)
-
-    # temp for abes server
-    organizer_role = ctx.guild.get_role(1026538144935448587)
-    volunteer_role = ctx.guild.get_role(1028478964051759175)
+    organizer_role = ctx.guild.get_role(899873033592913921)
+    volunteer_role = ctx.guild.get_role(993952153091702854)
+    main_category = ctx.guild.get_channel(894703368411422792)
 
     # Create a chapter role
     chapter_role = await ctx.guild.create_role(name=chapter_name, hoist=True)
     await ctx.send(f"✅ a new role called {chapter_role.name} was created")
 
-    # create a chapter category, viewble by chapter role
+    # Give chapter role permission to read/write in main category
+    overwrites = main_category.overwrites
+    overwrites[chapter_role] = discord.PermissionOverwrite(
+        read_messages=True,
+        send_messages=True,
+    )
+    await main_category.edit(overwrites=overwrites)
+    await ctx.send(
+        f"✅{chapter_role.name} now has read/write permission to the {main_category.name} category"
+    )
+
+    # create a chapter category, viewable by chapter role
     overwrites = {
-        ctx.guild.default_role: discord.PermissionOverwrite(read_messages=False),
-        chapter_role: discord.PermissionOverwrite(read_messages=True),
+        ctx.guild.default_role: discord.PermissionOverwrite(
+            read_messages=False,
+            send_messages=False,
+        ),
+        chapter_role: discord.PermissionOverwrite(
+            read_messages=True,
+            send_messages=True,
+        ),
     }
     category = await ctx.guild.create_category(chapter_name, overwrites=overwrites)
     await ctx.send(f"✅ a new category called {category.name} was created")
@@ -229,9 +243,18 @@ async def new_chapter(ctx, chapter_name):
 
     # create a private chapter text channel, viewable by organizer_roles and volunteer_roles
     overwrites = {
-        ctx.guild.default_role: discord.PermissionOverwrite(read_messages=False),
-        organizer_role: discord.PermissionOverwrite(read_messages=True),
-        volunteer_role: discord.PermissionOverwrite(read_messages=True),
+        ctx.guild.default_role: discord.PermissionOverwrite(
+            read_messages=False,
+            send_messages=False,
+        ),
+        organizer_role: discord.PermissionOverwrite(
+            read_messages=True,
+            send_messages=True,
+        ),
+        volunteer_role: discord.PermissionOverwrite(
+            read_messages=True,
+            send_messages=True,
+        ),
     }
     channel = await category.create_text_channel(
         chapter_name + "-private", overwrites=overwrites
