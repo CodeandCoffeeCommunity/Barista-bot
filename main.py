@@ -3,8 +3,11 @@ import os
 
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
 
 from meetup_rest_api import fetch_meetup_events_detail
+
+load_dotenv()
 
 DISCORD_TOKEN = os.getenv("BARISTA_TOKEN")
 
