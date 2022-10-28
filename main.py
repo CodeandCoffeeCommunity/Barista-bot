@@ -111,6 +111,9 @@ class Bot(commands.Bot):
             discord.PartialEmoji(
                 name="🦞"
             ): 1033893140270153749,  # ID of the role Boston associated with unicode emoji '🦞'.
+            discord.PartialEmoji(
+                name="🌉"
+            ): 1025226011832483880,  # ID of the role San Francisco associated with unicode emoji '🌉'.
         }
 
     async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
