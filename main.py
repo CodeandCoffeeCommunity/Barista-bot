@@ -230,7 +230,12 @@ async def new_chapter(ctx, chapter_name):
         read_messages=True,
         send_messages=True,
     )
-    await main_category.edit(overwrites=overwrites, sync_permissions=True)
+    await main_category.edit(overwrites=overwrites)
+
+    # Apply changes to all channels in main
+    for i in main_category.channels:
+        await i.edit(sync_permissions=True)
+
     await ctx.send(
         f"✅{chapter_role.name} now has read/write permission to the {main_category.name} category"
     )
