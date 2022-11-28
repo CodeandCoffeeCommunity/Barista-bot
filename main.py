@@ -125,7 +125,10 @@ class Bot(commands.Bot):
             ): 1042025367147401257,  # ID of the role Nova associated with unicode emoji '💡'.
             discord.PartialEmoji(
                 name="🔺"
-            ): 1042302822508658698,  # ID of the role Nova associated with unicode emoji '💡'.
+            ): 1042302822508658698,  # ID of the role Triangle associated with unicode emoji '🔺'.
+            discord.PartialEmoji(
+                name="🍺"
+            ): 1040183449627152396,  # ID of the role Milwaukee associated with unicode emoji '🍺'.
         }
 
     async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
