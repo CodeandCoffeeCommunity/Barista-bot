@@ -10,7 +10,8 @@ load_dotenv()
 
 DISCORD_TOKEN = os.getenv("BARISTA_TOKEN")
 
-message_content = Template("""
+message_content = Template(
+    """
 Welcome to **Code & Coffee**!
 We're a community of developers looking to grow and make new friends.
 
@@ -26,37 +27,36 @@ To view the rest of the server, click your city's colored button below:
 
 **3. Say "Hi" to your local developers in the left sidebar! (optional)**
 
-Don't have a local chapter? Message @Steve Chen we have a "just add human ✨ " C&C starter kit ready for you, a support network of chapter leaders, and resources that'll guide you through it. 
-""")
+Don't have a local chapter? Message ${steve_chen} we have a "just add human ✨ " C&C starter kit ready for you, a support network of chapter leaders, and resources that'll guide you through it. 
+"""
+)
 
 # This is the list of role IDs that will be added as buttons.
 role_ids = [
-    (1020907447822581823, discord.ButtonStyle.primary),  # Chicago
-    (1020906856136314901, discord.ButtonStyle.gray),  # NYC
-    (1020907461412143135, discord.ButtonStyle.danger),  # Austin
-    (1020907860185579530, discord.ButtonStyle.green),  # Columbus
-    (1020908145712828518, discord.ButtonStyle.blurple),  # St. Louis
-    (1021599522964639796, discord.ButtonStyle.red),  # Whidbey island
-    (1021495205641338950, discord.ButtonStyle.success),  # Virtual / Online
-    (1024892173310767186, discord.ButtonStyle.gray),  # DC/MD/VA
-    (1027739489302495314, discord.ButtonStyle.success),  # Cincinatti
-    (1032165548009721917, discord.ButtonStyle.green),  # Seattle
-    (1033893140270153749, discord.ButtonStyle.primary),  # Boston
-    (1025226011832483880, discord.ButtonStyle.secondary),  # San Francisco
-    (1036290493698555985, discord.ButtonStyle.danger),  # Atlanta
-    (1039006815599480873, discord.ButtonStyle.success),  # Ventura
-    (1042302822508658698, discord.ButtonStyle.danger),  # Triangle
-    (1040183449627152396, discord.ButtonStyle.success),  # Milwaukee
+    (1036290493698555985, "🏄"),  # Atlanta
+    (1020907461412143135, "🟡"), # Austin
+    (1033893140270153749, "🦞"), # Boston
+    (1020907447822581823, "🔴"), # Chicago
+    (1027739489302495314, "🌽"), # Cincinatti
+    (1020907860185579530, "🔵"), # Columbus
+    (1024892173310767186, "🟣"), # DC/MD/VA
+    (1020906856136314901, "🟢"), # NYC
+    (1040183449627152396, "🍺"), # Milwaukee
+    (1025226011832483880, "🌉"), # San Francisco
+    (1032165548009721917, "☕"), # Seattle
+    (1020908145712828518, "⚪"), # St. Louis
+    (1042302822508658698, "🔺"), # Triangle
+    (1039006815599480873, "🏄"), # Ventura
+    (1021495205641338950, "⚫"), # Virtual / Online
+    (1021599522964639796, "🏝️"), # Whidbey island
 ]
 
 
 class RoleButton(discord.ui.Button):
-    def __init__(self, role: discord.Role, style=discord.ButtonStyle.primary):
+    def __init__(self, role: discord.Role, emoji, style=discord.ButtonStyle.primary):
         """A button for one role. `custom_id` is needed for persistent views."""
         super().__init__(
-            label=role.name,
-            style=style,
-            custom_id=str(role.id),
+            label=role.name, style=style, custom_id=str(role.id), emoji=emoji
         )
 
     async def callback(self, interaction: discord.Interaction):
@@ -105,130 +105,12 @@ class Bot(commands.Bot):
             intents=intents,
             activity=discord.Game(name="💻 & ☕"),
         )
-        self.role_message_id = 960556131766398986  # ID of the message that can be reacted to to add/remove a role.
-        self.emoji_to_role = {
-            discord.PartialEmoji(
-                name="🔴"
-            ): 1020907447822581823,  # ID of the role Chicago associated with unicode emoji '🔴'.
-            discord.PartialEmoji(
-                name="🟢"
-            ): 1020906856136314901,  # ID of the role New York associated with unicode emoji '🟢'.
-            discord.PartialEmoji(
-                name="🟡"
-            ): 1020907461412143135,  # ID of the role Austin associated with unicode emoji '🟡'.
-            discord.PartialEmoji(
-                name="🔵"
-            ): 1020907860185579530,  # ID of the role Columbus associated with unicode emoji '🔵'.
-            discord.PartialEmoji(
-                name="⚪"
-            ): 1020908145712828518,  # ID of the role St. Louis associated with unicode emoji '⚪'.
-            discord.PartialEmoji(
-                name="🏝️"
-            ): 1021599522964639796,  # ID of the role Whidbey island associated with unicode emoji '🏝️'.
-            discord.PartialEmoji(
-                name="✅"
-            ): 960545821189894174,  # ID of the role Verified Member associated with unicode emoji '✅'.
-            discord.PartialEmoji(
-                name="⚫"
-            ): 1021495205641338950,  # ID of the role Virtual / Online associated with unicode emoji '⚫'.
-            discord.PartialEmoji(
-                name="🟣"
-            ): 1024892173310767186,  # ID of the role DC/MD/VA associated with unicode emoji '⚫'.
-            discord.PartialEmoji(
-                name="🌽"
-            ): 1027739489302495314,  # ID of the role Cincinatti associated with unicode emoji '🌽'.
-            discord.PartialEmoji(
-                name="☕"
-            ): 1032165548009721917,  # ID of the role Seattle associated with unicode emoji '☕'.
-            discord.PartialEmoji(
-                name="🦞"
-            ): 1033893140270153749,  # ID of the role Boston associated with unicode emoji '🦞'.
-            discord.PartialEmoji(
-                name="🌉"
-            ): 1025226011832483880,  # ID of the role San Francisco associated with unicode emoji '🌉'.
-            discord.PartialEmoji(
-                name="🍑"
-            ): 1036290493698555985,  # ID of the role Atlanta associated with unicode emoji '🍑'.
-            discord.PartialEmoji(
-                name="🏄"
-            ): 1039006815599480873,  # ID of the role Ventura associated with unicode emoji '🏄'.
-            discord.PartialEmoji(
-                name="💡"
-            ): 1042025367147401257,  # ID of the role Nova associated with unicode emoji '💡'.
-            discord.PartialEmoji(
-                name="🔺"
-            ): 1042302822508658698,  # ID of the role Triangle associated with unicode emoji '🔺'.
-            discord.PartialEmoji(
-                name="🍺"
-            ): 1040183449627152396,  # ID of the role Milwaukee associated with unicode emoji '🍺'.
+        self.color_to_style = {
+            0 : discord.ButtonStyle.danger, # red
+            1 : discord.ButtonStyle.blurple, # purple
+            2 : discord.ButtonStyle.success, # green
+            3 : discord.ButtonStyle.secondary, # gray
         }
-
-    async def on_raw_reaction_add(self, payload: discord.RawReactionActionEvent):
-        """Gives a role based on a reaction emoji."""
-        # Make sure that the message the user is reacting to is the one we care about.
-        if payload.message_id != self.role_message_id:
-            return
-
-        guild = self.get_guild(payload.guild_id)
-        if guild is None:
-            # Check if we're still in the guild and it's cached.
-            return
-
-        try:
-            role_id = self.emoji_to_role[payload.emoji]
-        except KeyError:
-            # If the emoji isn't the one we care about then exit as well.
-            return
-
-        role = guild.get_role(role_id)
-        if role is None:
-            # Make sure the role still exists and is valid.
-            return
-
-        try:
-            # Finally, add the role.
-            await payload.member.add_roles(role)
-            print(f"{payload.member} joined {role}")
-        except discord.HTTPException:
-            # If we want to do something in case of errors we'd do it here.
-            pass
-
-    async def on_raw_reaction_remove(self, payload: discord.RawReactionActionEvent):
-        """Removes a role based on a reaction emoji."""
-        # Make sure that the message the user is reacting to is the one we care about.
-        if payload.message_id != self.role_message_id:
-            return
-
-        guild = self.get_guild(payload.guild_id)
-        if guild is None:
-            # Check if we're still in the guild and it's cached.
-            return
-
-        try:
-            role_id = self.emoji_to_role[payload.emoji]
-        except KeyError:
-            # If the emoji isn't the one we care about then exit as well.
-            return
-
-        role = guild.get_role(role_id)
-        if role is None:
-            # Make sure the role still exists and is valid.
-            return
-
-        # The payload for `on_raw_reaction_remove` does not provide `.member`
-        # so we must get the member ourselves from the payload's `.user_id`.
-        member = guild.get_member(payload.user_id)
-        if member is None:
-            # Make sure the member still exists and is valid.
-            return
-
-        try:
-            # Finally, remove the role.
-            await member.remove_roles(role)
-            print(f"{member} left {role}")
-        except discord.HTTPException:
-            # If we want to do something in case of errors we'd do it here.
-            pass
 
     async def on_ready(self):
         print(f"Logged in as {self.user} (ID: {self.user.id})")
@@ -237,23 +119,31 @@ class Bot(commands.Bot):
         view = discord.ui.View(timeout=None)
         # Make sure to set the guild ID here to whatever server you want the buttons in!
         guild = self.get_guild(894703368411422790)
-        for role_id, style in role_ids:
+        count = 0
+        for role_id, emoji in role_ids:
             role = guild.get_role(role_id)
-            view.add_item(RoleButton(role, style))
+            view.add_item(RoleButton(role, discord.PartialEmoji(name=emoji), self.color_to_style[count % 4]))
+            count += 1
 
         # Add the view to the bot so that it will watch for button interactions.
         self.add_view(view)
         channel = self.get_channel(960555939579195473)
         link_str_data = {
-                "rules": self.get_channel(960540110477222008).mention,
-                "intro_circle": self.get_channel(1020074229804302468).mention,
-                }
+            "rules": self.get_channel(960540110477222008).mention,
+            "intro_circle": self.get_channel(1020074229804302468).mention,
+            "steve_chen": guild.get_member(109090414304202752).mention,
+        }
         # message_content = "Click a button to assign yourself a city role"
         try:
-            message = await channel.fetch_message(1049035230880743515)
-            await message.edit(content=message_content.substitute(link_str_data), view=view)
+            message = await channel.fetch_message(1049114511153578015)
+            await message.edit(
+                content=message_content.substitute(link_str_data), view=view
+            )
         except discord.errors.NotFound:
-            await channel.send(content=message_content.substitute(link_str_data), view=view)
+            await channel.send(
+                content=message_content.substitute(link_str_data), view=view
+            )
+
 
 bot = Bot()
 
