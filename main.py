@@ -10,45 +10,45 @@ load_dotenv()
 
 DISCORD_TOKEN = os.getenv("BARISTA_TOKEN")
 
-message_content = Template(
+message_content_1 = Template(
     """
-Welcome to **Code & Coffee**!
-We're a community of developers looking to grow and make new friends.
-
 **What is Code & Coffee?**
-We are the #1 in-person community on the Meetup.com platform. Our community hosts events typically twice a month, where we have self-taught hackers, current/ex FANG engineers, uni students, startup devs, fintech, bootcamp grads, and non-traditional career-switches of all ages, and more! If you do anything with an IDE you belong. Expect to meet new people, get job referrals, and see people hacking on cool side projects! We expect you to oblige by the Code of Conduct conveniently in ${rules}.
+We're a community by devs for new and old devs + folks that work with them. Additionally, we're the #1 in-person community on the Meetup.com platform! Our community hosts consistent events, typically once or twice a month, where we have self-taught hackers, current/ex-FANG engineers, uni students, startup devs, fintech, bootcamp grads, and non-traditional career-switches of all ages, and many more! 
 
-**1. New member - Onboarding >> START HERE<<**
-To view the rest of the server, click your city's colored button below:
+If you do anything with a text editor, you belong. Expect to meet new people, get job referrals, and meet folks hacking on cool side projects! We expect you to oblige by ${rules}.
 
-👈 You'll see your city's Discord channel on the left sidebar. 
-
-**2. Introduce yourself in ${intro_circle} channel** 
-
-**3. Say "Hi" to your local developers in the left sidebar! (optional)**
-
-Don't have a local chapter? Message ${steve_chen} we have a "just add human ✨ " C&C starter kit ready for you, a support network of chapter leaders, and resources that'll guide you through it. 
+**1. New member - Onboarding** >> START HERE <<
+To view the rest of the server, click your city's colored button below - clicking these buttons will add/remove channels, please explore!
 """
 )
+
+message_content_2 = Template(
+    """
+2. Introduce yourself in ${intro_circle} channel
+
+3. Say "Hi" to your local developers in the left sidebar! (optional)
+"""
+)
+
 
 # This is the list of role IDs that will be added as buttons.
 role_ids = [
     (1036290493698555985, "🏄"),  # Atlanta
-    (1020907461412143135, "🟡"), # Austin
-    (1033893140270153749, "🦞"), # Boston
-    (1020907447822581823, "🔴"), # Chicago
-    (1027739489302495314, "🌽"), # Cincinatti
-    (1020907860185579530, "🔵"), # Columbus
-    (1024892173310767186, "🟣"), # DC/MD/VA
-    (1020906856136314901, "🟢"), # NYC
-    (1040183449627152396, "🍺"), # Milwaukee
-    (1025226011832483880, "🌉"), # San Francisco
-    (1032165548009721917, "☕"), # Seattle
-    (1020908145712828518, "⚪"), # St. Louis
-    (1042302822508658698, "🔺"), # Triangle
-    (1039006815599480873, "🏄"), # Ventura
-    (1021495205641338950, "⚫"), # Virtual / Online
-    (1021599522964639796, "🏝️"), # Whidbey island
+    (1020907461412143135, "🟡"),  # Austin
+    (1033893140270153749, "🦞"),  # Boston
+    (1020907447822581823, "🔴"),  # Chicago
+    (1027739489302495314, "🌽"),  # Cincinatti
+    (1020907860185579530, "🔵"),  # Columbus
+    (1024892173310767186, "🟣"),  # DC/MD/VA
+    (1020906856136314901, "🟢"),  # NYC
+    (1040183449627152396, "🍺"),  # Milwaukee
+    (1025226011832483880, "🌉"),  # San Francisco
+    (1032165548009721917, "☕"),  # Seattle
+    (1020908145712828518, "⚪"),  # St. Louis
+    (1042302822508658698, "🔺"),  # Triangle
+    (1039006815599480873, "🏄"),  # Ventura
+    (1021495205641338950, "⚫"),  # Virtual / Online
+    (1021599522964639796, "🏝️"),  # Whidbey island
 ]
 
 
@@ -108,10 +108,10 @@ class Bot(commands.Bot):
             activity=discord.Game(name="💻 & ☕"),
         )
         self.color_to_style = {
-            0 : discord.ButtonStyle.danger, # red
-            1 : discord.ButtonStyle.blurple, # purple
-            2 : discord.ButtonStyle.success, # green
-            3 : discord.ButtonStyle.secondary, # gray
+            0: discord.ButtonStyle.danger,  # red
+            1: discord.ButtonStyle.blurple,  # purple
+            2: discord.ButtonStyle.success,  # green
+            3: discord.ButtonStyle.secondary,  # gray
         }
 
     async def on_ready(self):
@@ -124,26 +124,40 @@ class Bot(commands.Bot):
         count = 0
         for role_id, emoji in role_ids:
             role = guild.get_role(role_id)
-            view.add_item(RoleButton(role, discord.PartialEmoji(name=emoji), self.color_to_style[count % 4]))
+            view.add_item(
+                RoleButton(
+                    role,
+                    discord.PartialEmoji(name=emoji),
+                    self.color_to_style[count % 4],
+                )
+            )
             count += 1
 
         # Add the view to the bot so that it will watch for button interactions.
         self.add_view(view)
         channel = self.get_channel(960555939579195473)
-        link_str_data = {
-            "rules": self.get_channel(960540110477222008).mention,
-            "intro_circle": self.get_channel(1020074229804302468).mention,
-            "steve_chen": guild.get_member(109090414304202752).mention,
-        }
-        # message_content = "Click a button to assign yourself a city role"
+        rules = self.get_channel(960540110477222008).mention
+        intro_circle = self.get_channel(1020074229804302468).mention
+
+        # 1st message
         try:
-            message = await channel.fetch_message(1049114511153578015)
-            await message.edit(
-                content=message_content.substitute(link_str_data), view=view
+            message_1 = await channel.fetch_message(1049114511153578015)
+            await message_1.edit(
+                content=message_content_1.substitute(rules=rules), view=view
             )
         except discord.errors.NotFound:
             await channel.send(
-                content=message_content.substitute(link_str_data), view=view
+                content=message_content_1.substitute(rules=rules), view=view
+            )
+        # 2nd message
+        try:
+            message_2 = await channel.fetch_message(1049144027380973623)
+            await message_2.edit(
+                content=message_content_2.substitute(intro_circle=intro_circle)
+            )
+        except discord.errors.NotFound:
+            await channel.send(
+                content=message_content_2.substitute(intro_circle=intro_circle)
             )
 
 
