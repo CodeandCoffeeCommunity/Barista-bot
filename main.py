@@ -85,6 +85,7 @@ class RoleButton(discord.ui.Button):
                 f"🎉 You have been given the role {role.mention}!",
                 ephemeral=True,
             )
+            print(f"{user} joined {role}")
         else:
             # Otherwise, take the role away from the user.
             await user.remove_roles(role)
@@ -92,6 +93,7 @@ class RoleButton(discord.ui.Button):
                 f"❌ The {role.mention} role has been taken from you!",
                 ephemeral=True,
             )
+            print(f"{user} left {role}")
 
 
 class Bot(commands.Bot):
