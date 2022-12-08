@@ -4,7 +4,11 @@ import os
 import discord
 from string import Template
 from discord.ext import commands
+from discord.ext import tasks
+from zoneinfo import ZoneInfo
 from dotenv import load_dotenv
+
+import datetime
 
 load_dotenv()
 
@@ -96,6 +100,13 @@ class RoleButton(discord.ui.Button):
             print(f"{user} left {role}")
 
 
+class LinkButton(discord.ui.View):
+    def __init__(self, label, url):
+        super().__init__()
+
+        self.add_item(discord.ui.Button(label=label, url=url))
+
+
 class Bot(commands.Bot):
     def __init__(self):
         intents = discord.Intents.default()
@@ -159,6 +170,31 @@ class Bot(commands.Bot):
             await channel.send(
                 content=message_content_2.substitute(intro_circle=intro_circle)
             )
+
+    async def setup_hook(self) -> None:
+        # start the task to run in the background
+        self.monday_office_hour_reminder.start()
+
+    @tasks.loop(
+        time=datetime.time(hour=19, minute=30, tzinfo=ZoneInfo("America/New_York"))
+    )
+    async def monday_office_hour_reminder(self):
+        now = datetime.datetime.now(tz=ZoneInfo("America/New_York"))
+        if now.isoweekday() != 2:
+            return
+
+        channel = self.get_channel(980353246361169950)
+        office_hour_msg = """
+@here **Happening now**
+
+Staff Office hours - Weekly  
+
+Casual office hours. Come chat in the Google Meet with the different chapters. Ask questions, get help, meet each other, etc. fully up to you!
+"""
+        await channel.send(
+            content=office_hour_msg,
+            view=LinkButton("Google meet", "https://meet.google.com/xnq-fdtk-ibh"),
+        )
 
 
 bot = Bot()
