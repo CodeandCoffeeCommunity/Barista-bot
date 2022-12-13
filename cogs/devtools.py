@@ -45,7 +45,9 @@ class DevTools(commands.Cog):
                 synced = []
             else:
                 synced = await ctx.bot.tree.sync()
-            await ctx.send(f"Synced {len(synced)} commands {'globally' if spec is None else 'to the current guild.'}")
+            await ctx.send(
+                f"Synced {len(synced)} commands {'globally' if spec is None else 'to the current guild.'}"
+            )
             return
         ret = 0
         for guild in guilds:
@@ -83,15 +85,11 @@ class DevTools(commands.Cog):
         :param context: The hybrid command context.
         :param message: The message that should be repeated by the bot.
         """
-        embed = discord.Embed(
-            description=message,
-            color=0x9C84EF
-        )
+        embed = discord.Embed(description=message, color=0x9C84EF)
         await context.send(embed=embed)
 
     async def on_ready(self):
         print("ready from within DevTools cog")
-
 
 
 async def setup(bot):
