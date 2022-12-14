@@ -22,7 +22,7 @@ class Tasks(commands.Cog, name="tasks"):
     @tasks.loop(time=datetime.time(hour=19, minute=30, tzinfo=ZoneInfo("America/New_York")))
     async def monday_office_hour_reminder(self):
         now = datetime.datetime.now(tz=ZoneInfo("America/New_York"))
-        if now.isoweekday() != 2:
+        if now.isoweekday() != 1:
             return
 
         channel = self.bot.get_channel(980353246361169950)
