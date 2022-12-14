@@ -35,7 +35,7 @@ class Neetcode(commands.Cog):
         number="the number leetcode problem you want a soluiton for",
         language=", ".join(languages),
     )
-    async def leetcode(self, interaction: discord.Interaction, number: int, language: Literal[*languages]):
+    async def leetcode(self, interaction: discord.Interaction, number: int, language: Literal['c', 'cpp', 'csharp', 'go', 'java', 'javascript', 'kotlin', 'python', 'ruby', 'rust', 'scala', 'swift', 'typescript']):
         """Returns the leetcode solution"""
         files = list(self.neetcode.glob(language+"/"+str(number)+"-*"))
         if language not in languages or len(files) == 0:
