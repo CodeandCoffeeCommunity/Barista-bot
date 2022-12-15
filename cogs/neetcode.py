@@ -17,7 +17,7 @@ class Neetcode(commands.Cog):
         self.neetcode.mkdir(exist_ok=True)
         try:
             Repo.clone_from(
-                "https://github.com/self.neetcode-gh/leetcode.git", self.neetcode
+                "https://github.com/neetcode-gh/leetcode.git", self.neetcode
             )
             print("cloned repo")
         except git.exc.GitCommandError:
