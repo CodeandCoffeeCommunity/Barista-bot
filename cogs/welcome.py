@@ -1,26 +1,7 @@
-import discord
-from discord.ext import commands
 from string import Template
 
-message_content_1 = Template(
-    """
-**What is Code & Coffee?**
-We're a community by devs for new and old devs + folks that work with them. Additionally, we're the #1 in-person community on the Meetup.com platform! Our community hosts consistent events, typically once or twice a month, where we have self-taught hackers, current/ex-FANG engineers, uni students, startup devs, fintech, bootcamp grads, and non-traditional career-switches of all ages, and many more! 
-
-If you do anything with a text editor, you belong. Expect to meet new people, get job referrals, and meet folks hacking on cool side projects! We expect you to oblige by ${rules}.
-
-**1. New member - Onboarding** >> START HERE <<
-To view the rest of the server, click your city's colored button below - clicking these buttons will add/remove channels, please explore!
-"""
-)
-
-message_content_2 = Template(
-    """
-2. Introduce yourself in ${intro_circle} channel
-
-3. Say "Hi" to your local developers in the left sidebar! (optional)
-"""
-)
+import discord
+from discord.ext import commands
 
 
 class RoleButton(discord.ui.Button):
@@ -120,30 +101,17 @@ class Welcome(commands.Cog, name="welcome"):
         # Add the view to the bot so that it will watch for button interactions.
         self.bot.add_view(view)
         channel = self.bot.get_channel(960555939579195473)
-        rules = self.bot.get_channel(960540110477222008).mention
-        intro_circle = self.bot.get_channel(1020074229804302468).mention
 
-        # 1st message
+        # button message
         try:
-            message_1 = await channel.fetch_message(1049114511153578015)
-            await message_1.edit(
-                content=message_content_1.substitute(rules=rules), view=view
-            )
+            message_button = await channel.fetch_message(1052773288708948039) # Button msg in welcome channel
+            await message_button.edit(view=view)
         except discord.errors.NotFound:
-            await channel.send(
-                content=message_content_1.substitute(rules=rules), view=view
+            admin_channel = self.bot.get_channel(1020936089361448982)
+            welcome = self.bot.get_channel(960555939579195473).mention
+            await admin_channel.send(
+                content=f"I'm having trouble with the buttons in the {welcome} channel"
             )
-        # 2nd message
-        try:
-            message_2 = await channel.fetch_message(1049144027380973623)
-            await message_2.edit(
-                content=message_content_2.substitute(intro_circle=intro_circle)
-            )
-        except discord.errors.NotFound:
-            await channel.send(
-                content=message_content_2.substitute(intro_circle=intro_circle)
-            )
-        print("welcome msg updated")
 
 
 async def setup(bot):

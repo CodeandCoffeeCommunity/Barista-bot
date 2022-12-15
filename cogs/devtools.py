@@ -9,6 +9,36 @@ from discord.ext.commands import Context
 _logger = logging.getLogger(__name__)
 
 
+class EditMessage(discord.ui.Modal, title="Edit Bot Message"):
+    name = discord.ui.TextInput(
+        label="Name",
+        placeholder="Your name here...",
+    )
+
+    edit_old_msg = discord.ui.TextInput(
+        label="What do you think of this new feature?",
+        style=discord.TextStyle.long,
+        default="",
+    )
+
+    async def on_submit(self, interaction: discord.Interaction):
+        old_msg = await interaction.channel.fetch_message(self.edit_old_msg.custom_id)
+        await old_msg.edit(content=self.edit_old_msg.value)
+        await interaction.response.send_message(
+            f"The bots message has been edited, {self.name.value}!", ephemeral=True
+        )
+
+    async def on_error(
+        self, interaction: discord.Interaction, error: Exception
+    ) -> None:
+        await interaction.response.send_message(
+            "Oops! Something went wrong.", ephemeral=True
+        )
+
+        # Make sure we know what the error actually is
+        traceback.print_tb(error.__traceback__)
+
+
 class DevTools(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
@@ -64,7 +94,7 @@ class DevTools(commands.Cog):
         description="The bot will say anything you want.",
     )
     @app_commands.describe(message="The message that should be repeated by the bot")
-    @commands.is_owner()
+    @commands.has_any_role("Admin")
     async def say(self, context: Context, *, message: str) -> None:
         """
         The bot will say anything you want.
@@ -88,8 +118,18 @@ class DevTools(commands.Cog):
         embed = discord.Embed(description=message, color=0x9C84EF)
         await context.send(embed=embed)
 
-    async def on_ready(self):
-        print("ready from within DevTools cog")
+
+    @app_commands.command(name="edit")
+    @commands.has_any_role("Admin")
+    @app_commands.describe(msg_id="The ID of the message to edit")
+    async def edit_message_cmd(self, interaction: discord.Interaction, msg_id: str):
+        # Could also allow msg_id to be a str and then use MessageConverter
+        old_msg = await interaction.channel.fetch_message(int(msg_id))
+
+        modal = EditMessage()
+        modal.edit_old_msg.default = old_msg.content
+        modal.edit_old_msg.custom_id = str(msg_id)
+        await interaction.response.send_modal(modal)
 
 
 async def setup(bot):
