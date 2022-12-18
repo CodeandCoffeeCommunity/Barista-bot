@@ -16,7 +16,7 @@ class EditMessage(discord.ui.Modal, title="Edit Bot Message"):
     )
 
     edit_old_msg = discord.ui.TextInput(
-        label="What do you think of this new feature?",
+        label="What should the message be?",
         style=discord.TextStyle.long,
         default="",
     )
