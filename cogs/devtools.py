@@ -131,13 +131,17 @@ class DevTools(commands.Cog):
 
     @commands.has_any_role("Admin")
     async def edit_message_cmd(self, interaction: discord.Interaction, message: discord.Message) -> None:
-        if message.author == self.bot.user:
-            modal = EditMessage()
-            modal.edit_old_msg.default = message.content
-            modal.edit_old_msg.custom_id = str(message.id)
-            await interaction.response.send_modal(modal)
+        admin = interaction.guild.get_role(908389441863827476)
+        if admin in interaction.user.roles:
+            if message.author == self.bot.user:
+                modal = EditMessage()
+                modal.edit_old_msg.default = message.content
+                modal.edit_old_msg.custom_id = str(message.id)
+                await interaction.response.send_modal(modal)
+            else:
+                await interaction.response.send_message(content=f"You can only edit a message sent by {self.bot.user.mention}", ephemeral=True)
         else:
-            await interaction.response.send_message(content=f"You can only edit a message sent by {self.bot.user.mention}", ephemeral=True)
+            await interaction.response.send_message(content=f"This feature is reserved for admins", ephemeral=True)
             
 
 
