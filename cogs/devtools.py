@@ -11,7 +11,7 @@ _logger = logging.getLogger(__name__)
 
 class EditMessage(discord.ui.Modal, title="Edit Bot Message"):
     name = discord.ui.TextInput(
-        label="Name",
+       label="Name",
         placeholder="Your name here...",
     )
 
@@ -42,6 +42,16 @@ class EditMessage(discord.ui.Modal, title="Edit Bot Message"):
 class DevTools(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
+        self.ctx_menu = app_commands.ContextMenu(
+            name='Edit bot message',
+            callback=self.edit_message_cmd,
+        )
+        self.bot.tree.add_command(self.ctx_menu)
+
+    async def cog_unload(self) -> None:
+        self.bot.tree.remove_command(self.ctx_menu.name, type=self.ctx_menu.type)
+
+
 
     @commands.command()
     @commands.guild_only()
@@ -119,17 +129,30 @@ class DevTools(commands.Cog):
         await context.send(embed=embed)
 
 
-    @app_commands.command(name="edit")
     @commands.has_any_role("Admin")
-    @app_commands.describe(msg_id="The ID of the message to edit")
-    async def edit_message_cmd(self, interaction: discord.Interaction, msg_id: str):
-        # Could also allow msg_id to be a str and then use MessageConverter
-        old_msg = await interaction.channel.fetch_message(int(msg_id))
+    async def edit_message_cmd(self, interaction: discord.Interaction, message: discord.Message) -> None:
+        if message.author == self.bot.user:
+            modal = EditMessage()
+            modal.edit_old_msg.default = message.content
+            modal.edit_old_msg.custom_id = str(message.id)
+            await interaction.response.send_modal(modal)
+        else:
+            await interaction.response.send_message(content=f"You can only edit a message sent by {self.bot.user.mention}", ephemeral=True)
+            
 
-        modal = EditMessage()
-        modal.edit_old_msg.default = old_msg.content
-        modal.edit_old_msg.custom_id = str(msg_id)
-        await interaction.response.send_modal(modal)
+
+
+    @commands.command(hidden=True, aliases=['guilds'])
+    @commands.is_owner()
+    async def servers(self, ctx):
+        msg = '```js\n'
+        msg += '{!s:19s} | {!s:>5s} | {} | {}\n'.format('ID', 'Member', 'Name', 'Owner')
+        for guild in self.bot.guilds:
+            msg += '{!s:19s} | {!s:>5s}| {} | {}\n'.format(guild.id, guild.member_count, guild.name, guild.owner)
+        msg += '```'
+        await ctx.send(msg)
+
+
 
 
 async def setup(bot):
