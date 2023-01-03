@@ -1,74 +1,65 @@
-# Who Am I :robot:
-
-<!-- Add banner here -->
-
 <!-- Describe your project in brief -->
-I'm Barista :robot: - a robotic discord volunteer at the [Code and Coffee Community](https://www.codeandcoffee.community/).  
+# Barista-bot :robot:
 
-Thing I can Do:
- - give new members access to the city channels their interested in; removing all those annoying irrelevant notifications
- - bring in the meetup.com events into the discord server; making it easier for members to know when the next event is
+Barista-bot is a Discord bot for the Code and Coffee Discord community. It guides new recruits through the onboarding process and makes it easy for them to join city-specific channels. For admins, Barista-bot automates the process of creating new city channels and sends notifications and reminders.
 
-  I am written in :snake: python using the [Discord.py](https://github.com/Rapptz/discord.py) framework.
+## Features
 
-# Table of contents
+- Onboarding process for new recruits
+- City-specific channels
+- Automated creation of new city channels for admins
+- Notifications and reminders
 
-<!-- After you have introduced your project, it is a good idea to add a **Table of contents** or **TOC** as **cool** people say it. This would make it easier for people to navigate through your README and find exactly what they are looking for.
+## Technologies Used
 
-Here is a sample TOC that is actually the TOC for this README. -->
+This project is written in Python using the [discord.py](https://github.com/Rapptz/discord.py) framework.
 
-- [Who Am I :robot:](#who-am-i-robot)
-- [Table of contents](#table-of-contents)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Deployment](#deployment)
-- [License](#license)
+## Getting Started
 
-# Installation
-[(Back to top)](#table-of-contents)
+### Prerequisites
 
-First clone the repo on your device using the command below:
+- A Discord account and server
+- Python 3.5.3 or higher
+- [discord.py](https://github.com/Rapptz/discord.py)
 
-```  
-git clone git@github.com:CodeandCoffeeCommunity/Barista-bot.git
+### Installation
+
+1. Clone the repository and navigate to the directory:
+
+```bash
+git clone https://github.com/CodeandCoffeeCommunity/Barista-bot.git
+cd Barista-bot
 ```
-
-Before running the bot you will need to install all the requirements with this command:
-
-```
+### Install the dependencies:
+```bash
 pip install -r requirements.txt
 ```
-Create a bot on [discord.com](https://discord.com/developers/applications) and copy the `DISCORD_TOKEN` and export it as a variable.
-If discord bots are new to you I recommend this [video](https://youtu.be/nW8c7vT6Hl4) to set it up. If you are familiar with discord bots or you own one you can skip this part.
-```
-export BARISTA_TOKEN='<INSERT-THE-DISCORD-TOKEN>'
-```
+Set up the bot by following the [Discord Developer Portal](https://discord.com/developers/docs/intro) guide.
 
-# Usage
-[(Back to top)](#table-of-contents)
+Copy the bot's token and paste it in a file called .env in the root directory of the project.
 
-To start the bot you simply need to launch, either your terminal (Linux, Mac & Windows), or your Command Prompt (
-Windows).
-
-
-```
+### Run the bot:
+```bash
 python main.py
 ```
 
-# Deployment
-[(Back to top)](#table-of-contents)
+## Deployment
 
-You can deploy this project for free on [Railway.app](https://railway.app/)
+You can deploy this project for free on [Railway.app](https://railway.app/).
 
-1. Create a new project and select `deploy from GitHub repo`
-    give railway.app access to your newly created GitHub repo.
-2. Go to the variables tab and add the [above mentioned](#Installation) variable.
-3. Set the `start command` to be `python main.py`.
+1. Create a new project and select `Deploy from GitHub repo`. Give Railway.app access to your newly created GitHub repo.
+2. Go to the Variables tab and add the [above mentioned](#Installation) variable.
+3. Set the `Start Command` to `python main.py`.
 
 Barista bot will now be running all the time.
 
+## Contributing
 
-# License
-[(Back to top)](#table-of-contents)
+We welcome contributions to this project! If you have an idea for a new feature or have found a bug, please [open an issue](https://github.com/CodeandCoffeeCommunity/Barista-bot/issues). If you'd like to contribute code, please create a pull request.
 
-[MIT License](https://mit-license.org/)
+## License
+
+This project is licensed under the [MIT License](https://mit-license.org/) see the [LICENSE](LICENSE) file for details.
+
+
+
