@@ -33,15 +33,17 @@ class Tasks(commands.Cog, name="tasks"):
         office_hour_msg = """
 @here **Happening now**
 
-Staff Office hours - Weekly at {time}
+Staff Office hours - Weekly at {timing}
 
 Casual office hours. Come chat in the Google Meet with the different chapters. Ask questions, get help, meet each other, etc. fully up to you!
 """.format(
-            time=discord.utils.format_dt(
+            timing=discord.utils.format_dt(
                 datetime.datetime.combine(
-                    now,
-                    time),
-                style="t"))
+                    now, time, tzinfo=ZoneInfo("America/New_York")
+                ),
+                style="t",
+            )
+        )
         await channel.send(
             content=office_hour_msg,
             view=LinkButton("Google meet", "https://meet.google.com/xnq-fdtk-ibh"),
@@ -49,7 +51,7 @@ Casual office hours. Come chat in the Google Meet with the different chapters. A
         print("sent")
 
     @tasks.loop(time=datetime.time(hour=20, minute=25,
-                tzinfo=ZoneInfo("America/New_York")))
+                                   tzinfo=ZoneInfo("America/New_York")))
     async def all_hands_reminder(self):
         now = datetime.datetime.now(tz=ZoneInfo("America/New_York"))
         if now.day <= 7 and now.isoweekday() == 3:
@@ -71,9 +73,11 @@ We look forward to seeing you there!
 """.format(
                 time=discord.utils.format_dt(
                     datetime.datetime.combine(
-                        now,
-                        time),
-                    style="t"))
+                        now, time, tzinfo=ZoneInfo("America/New_York")
+                    ),
+                    style="t",
+                )
+            )
             await channel.send(
                 content=all_hands_msg,
                 view=LinkButton("Google meet", "https://meet.google.com/fgd-kknr-ogh"),
