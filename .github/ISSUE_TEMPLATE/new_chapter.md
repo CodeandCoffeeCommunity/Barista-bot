@@ -1,7 +1,7 @@
 ---
 name: New Chapter
 about: Add a new city for Barista to assign roles to
-title: 'Add [City/Chapter]'
+title: 'New Chapter: <CHAPTER>'
 labels: 'new chapter'
 assignees: 'abe-101'
 
@@ -14,9 +14,6 @@ assignees: 'abe-101'
 <!-- e.g. New York -->
 Name: 
 
-#### City Emoji
-<!-- e.g. 🟢 -->
-Emoji: 
 
 #### Role Number
 <!--
