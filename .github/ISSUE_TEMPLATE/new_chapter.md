@@ -1,3 +1,12 @@
+---
+name: New Chapter
+about: Add a new city for Barista to assign roles to
+title: 'Add [City/Chapter]'
+labels: 'new chapter'
+assignees: 'abe-101'
+
+---
+
 # New Chapter Bot Setup
 <!-- The following is needed inorder to set up the bot for a new chapter: name, emoji and Role number -->
 
