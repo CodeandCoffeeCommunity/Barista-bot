@@ -5,10 +5,10 @@ from discord.ext import commands
 
 
 class RoleButton(discord.ui.Button):
-    def __init__(self, role: discord.Role, emoji, style=discord.ButtonStyle.primary):
+    def __init__(self, role: discord.Role, style=discord.ButtonStyle.primary):
         """A button for one role. `custom_id` is needed for persistent views."""
         super().__init__(
-            label=role.name, style=style, custom_id=str(role.id), emoji=emoji
+            label=role.name, style=style, custom_id=str(role.id)
         )
 
     async def callback(self, interaction: discord.Interaction):
@@ -54,24 +54,24 @@ class Welcome(commands.Cog, name="welcome"):
         bot.loop.create_task(self.welcome_msg())
 
         # This is the list of role IDs that will be added as buttons.
-        self.role_ids = {
-            1036290493698555985: discord.PartialEmoji(name="🏄"),  # Atlanta
-            1020907461412143135: discord.PartialEmoji(name="🟡"),  # Austin
-            1033893140270153749: discord.PartialEmoji(name="🦞"),  # Boston
-            1020907447822581823: discord.PartialEmoji(name="🔴"),  # Chicago
-            1027739489302495314: discord.PartialEmoji(name="🌽"),  # Cincinatti
-            1020907860185579530: discord.PartialEmoji(name="🔵"),  # Columbus
-            1024892173310767186: discord.PartialEmoji(name="🟣"),  # DC/MD/VA
-            1020906856136314901: discord.PartialEmoji(name="🟢"),  # NYC
-            1040183449627152396: discord.PartialEmoji(name="🍺"),  # Milwaukee
-            1025226011832483880: discord.PartialEmoji(name="🌉"),  # San Francisco
-            1032165548009721917: discord.PartialEmoji(name="☕"),  # Seattle
-            1020908145712828518: discord.PartialEmoji(name="⚪"),  # St. Louis
-            1042302822508658698: discord.PartialEmoji(name="🔺"),  # Triangle
-            1039006815599480873: discord.PartialEmoji(name="🏄"),  # Ventura
-            1021495205641338950: discord.PartialEmoji(name="⚫"),  # Virtual / Online
-            1021599522964639796: discord.PartialEmoji(name="🏝️"),  # Whidbey island
-        }
+        self.role_ids = [
+            1036290493698555985,  # Atlanta
+            1020907461412143135,  # Austin
+            1033893140270153749,  # Boston
+            1020907447822581823,  # Chicago
+            1027739489302495314,  # Cincinatti
+            1020907860185579530,  # Columbus
+            1024892173310767186,  # DC/MD/VA
+            1020906856136314901,  # NYC
+            1040183449627152396,  # Milwaukee
+            1025226011832483880,  # San Francisco
+            1032165548009721917,  # Seattle
+            1020908145712828518,  # St. Louis
+            1042302822508658698,  # Triangle
+            1039006815599480873,  # Ventura
+            1021495205641338950,  # Virtual / Online
+            1021599522964639796,  # Whidbey island
+        ]
         self.color_to_style = {
             0: discord.ButtonStyle.danger,  # red
             1: discord.ButtonStyle.blurple,  # purple
@@ -87,12 +87,11 @@ class Welcome(commands.Cog, name="welcome"):
         # Make sure to set the guild ID here to whatever server you want the buttons in!
         guild = self.bot.get_guild(894703368411422790)
         count = 0
-        for role_id, emoji in self.role_ids.items():
+        for role_id in self.role_ids:
             role = guild.get_role(role_id)
             view.add_item(
                 RoleButton(
                     role,
-                    emoji,
                     self.color_to_style[count % 4],
                 )
             )
