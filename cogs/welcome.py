@@ -72,7 +72,7 @@ class Welcome(commands.Cog, name="welcome"):
             1039006815599480873,  # Ventura
             1021495205641338950,  # Virtual / Online
             1021599522964639796,  # Whidbey island
-            1074894021790543902,  # Houston
+            1074898462547648623,  # Houston
         ]
         self.color_to_style = {
             0: discord.ButtonStyle.danger,  # red
