@@ -31,7 +31,7 @@ class Tasks(commands.Cog, name="tasks"):
         now = datetime.datetime.now(tz=ZoneInfo("America/New_York"))
         time = datetime.time(hour=19, minute=30)
         office_hour_msg = """
-@here **Happening now**
+**Happening now**
 
 Staff Office hours - Weekly at {timing}
 
