@@ -65,6 +65,7 @@ class Welcome(commands.Cog, name="welcome"):
             1024892173310767186,  # DC/MD/VA
             1088299493243490354,  # Longview
             1074898462547648623,  # Houston
+            1166518630545104996,  # Johnson City
             1020906856136314901,  # NYC
             1040183449627152396,  # Milwaukee
             1025226011832483880,  # San Francisco
