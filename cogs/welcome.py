@@ -64,12 +64,14 @@ class Welcome(commands.Cog, name="welcome"):
             1020907447822581823,  # Chicago
             1027739489302495314,  # Cincinatti
             1020907860185579530,  # Columbus
+            1210853041981497356,  # Dallas
             1024892173310767186,  # DC/MD/VA
             1088299493243490354,  # Longview
             1074898462547648623,  # Houston
             1166518630545104996,  # Johnson City
             1020906856136314901,  # NYC
             1040183449627152396,  # Milwaukee
+            1210852957701279744,  # Portsmouth
             1025226011832483880,  # San Francisco
             1032165548009721917,  # Seattle
             1020908145712828518,  # St. Louis
