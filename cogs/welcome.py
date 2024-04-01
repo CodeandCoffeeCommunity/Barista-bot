@@ -72,6 +72,7 @@ class Welcome(commands.Cog, name="welcome"):
             1020906856136314901,  # NYC
             1040183449627152396,  # Milwaukee
             1210852957701279744,  # Portsmouth
+            1202305868809375744,  # Providence
             1025226011832483880,  # San Francisco
             1032165548009721917,  # Seattle
             1020908145712828518,  # St. Louis
