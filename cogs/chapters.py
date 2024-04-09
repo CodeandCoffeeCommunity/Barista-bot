@@ -61,7 +61,7 @@ class Chapters(commands.Cog, name="chapters"):
         await context.send(f"✅ a new category called {category.name} was created")
 
         # create a general chapter text channel
-        channel = await category.create_text_channel(city + "-general")
+        channel = await category.create_text_channel("general")
         await context.send(f"✅ a new text-channel called {channel.name} was created")
 
         # create a private chapter text channel, viewable by organizer_roles and volunteer_roles
@@ -80,7 +80,7 @@ class Chapters(commands.Cog, name="chapters"):
             ),
         }
         channel = await category.create_text_channel(
-            city + "-private", overwrites=overwrites
+            "staff", overwrites=overwrites
         )
 
         await context.send(f"✅ a new text-channel called {channel.name} was created")
