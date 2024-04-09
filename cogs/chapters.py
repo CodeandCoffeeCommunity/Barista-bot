@@ -27,7 +27,7 @@ class Chapters(commands.Cog, name="chapters"):
         main_category = context.guild.get_channel(894703368411422792)
 
         # Create a chapter role
-        chapter_role = await context.guild.create_role(name=city, hoist=True)
+        chapter_role = await context.guild.create_role(name=city, hoist=True, mentionable=True)
         await context.send(f"✅ a new role called {chapter_role.name} was created")
 
         # Give chapter role permission to read/write in main category
