@@ -58,7 +58,6 @@ class Welcome(commands.Cog, name="welcome"):
             1036290493698555985,  # Atlanta
             1020907461412143135,  # Austin
             1033893140270153749,  # Boston
-            1172386669081669683,  # Committed Coders Program
             1193739841859485758,  # Connecticut
             1088299555512131595,  # Chattanooga
             1020907447822581823,  # Chicago
@@ -69,6 +68,7 @@ class Welcome(commands.Cog, name="welcome"):
             1088299493243490354,  # Longview
             1074898462547648623,  # Houston
             1166518630545104996,  # Johnson City
+            1231000334634192936,  # New Jersey
             1020906856136314901,  # NYC
             1040183449627152396,  # Milwaukee
             1210852957701279744,  # Portsmouth
