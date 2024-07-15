@@ -7,9 +7,7 @@ from discord.ext import commands
 class RoleButton(discord.ui.Button):
     def __init__(self, role: discord.Role, style=discord.ButtonStyle.primary):
         """A button for one role. `custom_id` is needed for persistent views."""
-        super().__init__(
-            label=role.name, style=style, custom_id=str(role.id)
-        )
+        super().__init__(label=role.name, style=style, custom_id=str(role.id))
 
     async def callback(self, interaction: discord.Interaction):
         """
@@ -90,37 +88,63 @@ class Welcome(commands.Cog, name="welcome"):
         }
 
     async def welcome_msg(self) -> None:
-
         await self.bot.wait_until_ready()
-        # We recreate the view as we did in the /post command.
-        view = discord.ui.View(timeout=None)
-        # Make sure to set the guild ID here to whatever server you want the buttons in!
-        guild = self.bot.get_guild(894703368411422790)
-        count = 0
-        for role_id in self.role_ids:
+        guild = self.bot.get_guild(894703368411422790)  # The guild ID
+        channel = self.bot.get_channel(
+            960555939579195473
+        )  # The channel ID for the role messages
+
+        # Create two views
+        first_view = discord.ui.View(timeout=None)
+        second_view = discord.ui.View(timeout=None)
+
+        # Process first 20 roles for the first view
+        for count, role_id in enumerate(self.role_ids[:20]):
             role = guild.get_role(role_id)
-            view.add_item(
-                RoleButton(
-                    role,
-                    self.color_to_style[count % 4],
+            if role:
+                first_view.add_item(
+                    RoleButton(
+                        role,
+                        self.color_to_style[count % 4],
+                    )
                 )
-            )
-            count += 1
 
-        # Add the view to the bot so that it will watch for button interactions.
-        self.bot.add_view(view)
-        channel = self.bot.get_channel(960555939579195473)
+        # Process remaining roles for the second view
+        for count, role_id in enumerate(self.role_ids[20:]):
+            role = guild.get_role(role_id)
+            if role:
+                second_view.add_item(
+                    RoleButton(
+                        role,
+                        self.color_to_style[count % 4],
+                    )
+                )
 
-        # button message
+        # Ensure the views are watching for interactions
+        self.bot.add_view(first_view)
+        self.bot.add_view(second_view)
+
+        # Handling first message
         try:
-            message_button = await channel.fetch_message(1052773288708948039) # Button msg in welcome channel
-            await message_button.edit(view=view)
-        except discord.errors.NotFound:
-            admin_channel = self.bot.get_channel(1020936089361448982)
-            welcome = self.bot.get_channel(960555939579195473).mention
-            await admin_channel.send(
-                content=f"I'm having trouble with the buttons in the {welcome} channel"
+            first_message = await channel.fetch_message(
+                1052773288708948039
+            )  # First button message ID
+            await first_message.edit(
+                content="Select your primary role:", view=first_view
             )
+        except discord.errors.NotFound:
+            await channel.send("Select your primary role:", view=first_view)
+
+        # Handling second message
+        try:
+            second_message = await channel.fetch_message(
+                1262216201543745579
+            )  # Second button message ID
+            await second_message.edit(
+                content="Select your additional roles:", view=second_view
+            )
+        except discord.errors.NotFound:
+            await channel.send("Select your additional roles:", view=second_view)
 
 
 async def setup(bot):
