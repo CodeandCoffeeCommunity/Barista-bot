@@ -130,22 +130,18 @@ class Welcome(commands.Cog, name="welcome"):
             first_message = await channel.fetch_message(
                 1052773288708948039
             )  # First button message ID
-            await first_message.edit(
-                content="Select your primary role:", view=first_view
-            )
+            await first_message.edit(content="Select your role:", view=first_view)
         except discord.errors.NotFound:
-            await channel.send("Select your primary role:", view=first_view)
+            await channel.send("Select your role:", view=first_view)
 
         # Handling second message
         try:
             second_message = await channel.fetch_message(
                 1262216201543745579
             )  # Second button message ID
-            await second_message.edit(
-                content="Select your additional roles:", view=second_view
-            )
+            await second_message.edit(content="Select your roles:", view=second_view)
         except discord.errors.NotFound:
-            await channel.send("Select your additional roles:", view=second_view)
+            await channel.send("Select your roles:", view=second_view)
 
 
 async def setup(bot):
