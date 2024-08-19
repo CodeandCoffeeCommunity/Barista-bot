@@ -55,6 +55,7 @@ class Welcome(commands.Cog, name="welcome"):
         self.role_ids = [
             1036290493698555985,  # Atlanta
             1020907461412143135,  # Austin
+            1274944761920225300,  # Boise
             1033893140270153749,  # Boston
             1193739841859485758,  # Connecticut
             1088299555512131595,  # Chattanooga
