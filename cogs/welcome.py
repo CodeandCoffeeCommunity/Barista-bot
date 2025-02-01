@@ -57,6 +57,7 @@ class Welcome(commands.Cog, name="welcome"):
             1020907461412143135,  # Austin
             1274944761920225300,  # Boise
             1033893140270153749,  # Boston
+            1335321808043507810,  # Buffalo
             1193739841859485758,  # Connecticut
             1088299555512131595,  # Chattanooga
             1020907447822581823,  # Chicago
