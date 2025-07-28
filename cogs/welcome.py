@@ -80,6 +80,7 @@ class Welcome(commands.Cog, name="welcome"):
             1025226011832483880,  # San Francisco
             1032165548009721917,  # Seattle
             1020908145712828518,  # St. Louis
+            1398325883756089395,  # Tallahassee
             1042302822508658698,  # Triangle
             1039006815599480873,  # Ventura
             1021495205641338950,  # Virtual / Online
