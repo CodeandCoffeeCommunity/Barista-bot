@@ -69,6 +69,7 @@ class Welcome(commands.Cog, name="welcome"):
             1088299493243490354,  # Longview
             1074898462547648623,  # Houston
             1166518630545104996,  # Johnson City
+            1419873317933940878,  # Kansas City
             1231000334634192936,  # New Jersey
             1020906856136314901,  # NYC
             1040183449627152396,  # Milwaukee
