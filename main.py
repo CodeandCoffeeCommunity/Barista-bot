@@ -12,9 +12,10 @@ DISCORD_TOKEN = os.getenv("BARISTA_TOKEN")
 
 class Bot(commands.Bot):
     def __init__(self):
+        # No privileged intents. This server has 10k+ members, so Discord only
+        # grants them after a review. Role buttons, slash commands and
+        # scheduled posts work without them.
         intents = discord.Intents.default()
-        intents.message_content = True
-        intents.members = True
 
         super().__init__(
             command_prefix=commands.when_mentioned_or("!"),
